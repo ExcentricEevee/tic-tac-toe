@@ -1,4 +1,5 @@
 require_relative "lib/player"
+require_relative "lib/board"
 
 def setup_players
   puts "Who is playing as X?"
