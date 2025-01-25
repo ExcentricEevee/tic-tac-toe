@@ -1,5 +1,4 @@
 require_relative "lib/player"
-require_relative "lib/board"
 require_relative "lib/game"
 
 # Set up two players
@@ -19,4 +18,4 @@ puts "Your players are...
 
 game = Game.new(player_x, player_o)
 game.insert_symbol(game.get_choice - 1)
-game.board.show
+game.show_board
