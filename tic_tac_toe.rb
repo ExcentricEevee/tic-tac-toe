@@ -18,4 +18,5 @@ puts "Your players are...
 #{player_o.name} as #{player_o.symbol}"
 
 game = Game.new(player_x, player_o)
-p game
+game.insert_symbol(game.get_choice - 1)
+game.board.show
