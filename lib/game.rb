@@ -1,6 +1,6 @@
 # This class keeps track of the game state as a whole without crowding tic_tac_toe.rb
 class Game
-  attr_reader :board, :player_x, :player_o, :current_player
+  attr_reader :board, :player_x, :player_o
 
   def initialize(player1, player2)
     # Intentionally leaving index 0 blank for convenience
@@ -15,6 +15,7 @@ class Game
       player_choice = get_choice
       insert_symbol(player_choice)
       show_board
+      change_current_player
     end
   end
 
@@ -30,9 +31,12 @@ class Game
 
   private
 
+  attr_accessor :current_player
+
   def get_choice
     loop do
       puts "What's your move? (from 1 to 9)"
+      puts "Current Player: #{current_player.name} (#{current_player.symbol})"
       response = gets.chomp.to_i
       # This even catches non-integer input already
       if response < 1 || response > 9
@@ -47,5 +51,13 @@ class Game
 
   def insert_symbol(idx)
     board[idx] = current_player.symbol
+  end
+
+  def change_current_player
+    if current_player == player_x
+      self.current_player = player_o
+    else
+      self.current_player = player_x
+    end
   end
 end
