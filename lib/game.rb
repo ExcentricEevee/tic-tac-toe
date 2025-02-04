@@ -2,6 +2,10 @@
 class Game
   attr_reader :board, :player_x, :player_o
 
+  WIN_CONDITIONS = [[1, 2, 3], [4, 5, 6], [7, 8, 9], # rows
+                    [1, 4, 7], [2, 5, 8], [3, 6, 9], # columns
+                    [1, 5, 9], [3, 5, 7]].freeze # diagonals
+
   def initialize(player1, player2)
     # Intentionally leaving index 0 blank for convenience
     @board = Array.new(10, " ")
@@ -15,6 +19,7 @@ class Game
       player_choice = get_choice
       insert_symbol(player_choice)
       show_board
+      check_board_state
       change_current_player
     end
   end
@@ -59,5 +64,18 @@ class Game
     else
       self.current_player = player_x
     end
+  end
+
+  def check_board_state
+    WIN_CONDITIONS.each do |condition|
+      row_being_checked = [board[condition[0]], board[condition[1]], board[condition[2]]]
+      if row_being_checked.uniq.length == 1 && !row_being_checked.include?(" ")
+        declare_winner
+      end
+    end
+  end
+
+  def declare_winner
+    puts "#{current_player.name} wins the game!"
   end
 end
