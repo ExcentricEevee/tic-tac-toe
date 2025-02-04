@@ -19,7 +19,12 @@ class Game
       player_choice = get_choice
       insert_symbol(player_choice)
       show_board
-      check_board_state
+
+      if win_condition_reached?
+        declare_winner
+        break
+      end
+
       change_current_player
     end
   end
@@ -66,13 +71,15 @@ class Game
     end
   end
 
-  def check_board_state
+  def win_condition_reached?
     WIN_CONDITIONS.each do |condition|
       row_being_checked = [board[condition[0]], board[condition[1]], board[condition[2]]]
       if row_being_checked.uniq.length == 1 && !row_being_checked.include?(" ")
-        declare_winner
+        return true
       end
     end
+
+    false
   end
 
   def declare_winner
