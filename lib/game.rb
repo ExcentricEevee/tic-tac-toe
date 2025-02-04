@@ -23,6 +23,9 @@ class Game
       if win_condition_reached?
         declare_winner
         break
+      elsif tie_reached?
+        puts "No one wins!"
+        break
       end
 
       change_current_player
@@ -84,5 +87,10 @@ class Game
 
   def declare_winner
     puts "#{current_player.name} wins the game!"
+  end
+
+  def tie_reached?
+    board[0] = "" # so our unused square isn't considered in the test
+    !board.include?(" ")
   end
 end
