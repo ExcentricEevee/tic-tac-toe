@@ -21,7 +21,7 @@ class Game
       show_board
 
       if win_condition_reached?
-        declare_winner
+        puts "#{current_player.name} wins the game!"
         break
       elsif tie_reached?
         puts "No one wins!"
@@ -83,10 +83,6 @@ class Game
     end
 
     false
-  end
-
-  def declare_winner
-    puts "#{current_player.name} wins the game!"
   end
 
   def tie_reached?
